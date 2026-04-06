@@ -1,15 +1,16 @@
--- tabel jabatan
 create table jabatan(
 id int auto_increment primary key not null,
 nama varchar(100) not null,
-description varchar(255) not null);
+description varchar(255) not null
+);
 
--- tabel user
 create table users(
     id int auto_increment primary key not null,
-    email varchar(255) unique not null,
+    email varchar(255) not null,
     password varchar(255) not null,
-    username varchar(100) not null
+    username varchar(100) not null,
+    role enum('admin','karyawan'),
+    UNIQUE(email)
 );
 
 
@@ -26,7 +27,7 @@ create table karyawan(
     user_id int,
     jabatan_id int,
     fullName varchar(255) not null,
-    foreign key (user_id) references users(id)
+    foreign key (user_id) references users(id),
     foreign key (jabatan_id) references jabatan(id)
 );
 
@@ -70,9 +71,9 @@ CREATE TABLE permissions (
     tanggal DATE,
     tipe ENUM('izin','sakit','cuti','perbaikan_absen'),
     alasan TEXT,
-    created_at DATETIME
+    created_at DATETIME,
 
     status ENUM('pending','approved','rejected'),
     approved_by INT,
-    foreign key(approved_by) references users(id),
+    foreign key(approved_by) references users(id)
 );

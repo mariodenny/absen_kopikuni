@@ -1,27 +1,26 @@
 <?php
+define("APP", true);
 include 'partials/header.php';
-?>
+include 'php/auth.php';
 
-<div class="container mt-4">
-    <h1>This example of using php include</h1>
-    <p>So instead of writing all component into one place. Just put it separately to make cleaner code.</p>
-    <p>We use index.php as main route file , so all the pages no need to write it separately</p>
-</div>
+$page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
-<div class="container mt-4 p-2">
-    <?php
-    $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+$protected_pages = ['admin', 'karyawan'];
 
-    $path = "components/$page.php";
-    if (file_exists($path)) {
-        include $path;
-    } else {
-        include "components/404.php";
-    }
-    ?>
-</div>
+$admin_pages = ['admin'];
 
+if (in_array($page, $protected_pages)) {
+    checkAuth();
+}
 
-<?php
-include 'partials/footer.php';
-?>
+if (in_array($page, $admin_pages)) {
+    checkRole('admin');
+}
+
+$path = "components/$page.php";
+
+if (file_exists($path)) {
+    include $path;
+} else {
+    include "components/404.php";
+}
