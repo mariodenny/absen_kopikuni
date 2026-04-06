@@ -1,10 +1,9 @@
 <?php
 $dbHost = "localhost";
-$dbUsername = "root";
-$dbPassword = "";
-$dbName = "dry_kiss";
+$dbUsername = "denny_kopi";
+$dbPassword = "Kucing123";
+$dbName = "absensi_kopikuni";
 $dbPort = 3306;
-
 
 $connect = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
 
