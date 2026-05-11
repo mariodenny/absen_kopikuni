@@ -1,39 +1,83 @@
 <?php
-session_start();
+// Nav is included inside header.php after session_start() is called in index.php
+$currentPage = isset($_GET['page']) ? $_GET['page'] : 'home';
+$isLoggedIn  = isset($_SESSION['user']);
+$role        = $isLoggedIn ? $_SESSION['user']['role'] : null;
+$username    = $isLoggedIn ? $_SESSION['user']['username'] : '';
+$initials    = $isLoggedIn ? strtoupper(substr($username, 0, 2)) : '';
 ?>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index.php?page=home">Kopikuni</a>
+<nav class="kopi-navbar" id="kopi-navbar">
+    <!-- Brand -->
+    <a href="index.php?page=home" class="kopi-brand">
+        <div class="kopi-brand-icon">☕</div>
+        <span class="kopi-brand-name">KopiKuni</span>
+    </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- Right side -->
+    <div class="kopi-nav-right">
+        <?php if ($isLoggedIn): ?>
+            <!-- Desktop user info -->
+            <div class="kopi-nav-user kopi-desktop-only">
+                <div class="kopi-avatar"><?= htmlspecialchars($initials) ?></div>
+                <div>
+                    <div class="kopi-nav-username"><?= htmlspecialchars($username) ?></div>
+                    <div class="kopi-nav-role"><?= $role === 'admin' ? '👑 Admin' : '👤 Karyawan' ?></div>
+                </div>
+                <a href="index.php?page=logout" class="btn-kopi btn-kopi-ghost btn-kopi-sm">Keluar</a>
+            </div>
 
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=home">Home</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=posts">Posts</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=shopping">Shopping</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=about">About</a>
-                </li>
-
-            </ul>
-
-            <span class="navbar-text">
-                Kopikuni
-            </span>
-        </div>
+            <!-- Mobile hamburger -->
+            <button id="sidebar-toggle" class="kopi-hamburger kopi-mobile-only" type="button" aria-label="Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        <?php else: ?>
+            <a href="index.php?page=login" class="btn-kopi btn-kopi-primary btn-kopi-sm">Login</a>
+        <?php endif; ?>
     </div>
 </nav>
+
+<!-- Sidebar Overlay (mobile) -->
+<div class="kopi-sidebar-overlay" id="sidebar-overlay"></div>
+
+<?php if ($isLoggedIn): ?>
+<!-- Mobile Bottom Navigation -->
+<nav class="kopi-bottom-nav kopi-mobile-only" id="kopi-bottom-nav">
+    <?php if ($role === 'karyawan'): ?>
+        <a href="index.php?page=karyawan/dashboard" class="kopi-bottom-nav-item <?= $currentPage === 'karyawan/dashboard' ? 'active' : '' ?>">
+            <span class="kopi-bottom-nav-icon">🏠</span>
+            <span class="kopi-bottom-nav-label">Home</span>
+        </a>
+        <a href="index.php?page=absen" class="kopi-bottom-nav-item <?= $currentPage === 'absen' ? 'active' : '' ?>">
+            <span class="kopi-bottom-nav-icon kopi-bottom-nav-scan">📷</span>
+            <span class="kopi-bottom-nav-label">Absen</span>
+        </a>
+        <a href="index.php?page=karyawan/history" class="kopi-bottom-nav-item <?= $currentPage === 'karyawan/history' ? 'active' : '' ?>">
+            <span class="kopi-bottom-nav-icon">📅</span>
+            <span class="kopi-bottom-nav-label">History</span>
+        </a>
+        <a href="index.php?page=karyawan/izin" class="kopi-bottom-nav-item <?= $currentPage === 'karyawan/izin' ? 'active' : '' ?>">
+            <span class="kopi-bottom-nav-icon">📝</span>
+            <span class="kopi-bottom-nav-label">Izin</span>
+        </a>
+    <?php elseif ($role === 'admin'): ?>
+        <a href="index.php?page=admin/dashboard" class="kopi-bottom-nav-item <?= $currentPage === 'admin/dashboard' ? 'active' : '' ?>">
+            <span class="kopi-bottom-nav-icon">🏠</span>
+            <span class="kopi-bottom-nav-label">Home</span>
+        </a>
+        <a href="index.php?page=admin/verifikasi" class="kopi-bottom-nav-item <?= $currentPage === 'admin/verifikasi' ? 'active' : '' ?>">
+            <span class="kopi-bottom-nav-icon">✅</span>
+            <span class="kopi-bottom-nav-label">Verifikasi</span>
+        </a>
+        <a href="index.php?page=admin/rekap" class="kopi-bottom-nav-item <?= $currentPage === 'admin/rekap' ? 'active' : '' ?>">
+            <span class="kopi-bottom-nav-icon">📊</span>
+            <span class="kopi-bottom-nav-label">Rekap</span>
+        </a>
+        <a href="index.php?page=admin/shift_settings" class="kopi-bottom-nav-item <?= str_starts_with($currentPage, 'admin/shift') || str_starts_with($currentPage, 'admin/karyawan') || $currentPage === 'admin/persetujuan_izin' ? 'active' : '' ?>">
+            <span class="kopi-bottom-nav-icon">⚙️</span>
+            <span class="kopi-bottom-nav-label">Lainnya</span>
+        </a>
+    <?php endif; ?>
+</nav>
+<?php endif; ?>
