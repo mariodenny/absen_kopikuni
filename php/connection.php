@@ -1,7 +1,7 @@
 <?php
 $dbHost = "localhost";
-$dbUsername = "denny_kopi";
-$dbPassword = "Kucing123";
+$dbUsername = "absen_kopi";
+$dbPassword = "haikal11";
 $dbName = "absensi_kopikuni";
 $dbPort = 3306;
 

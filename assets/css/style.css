@@ -1,46 +1,50 @@
 /* ============================================
    ABSENSI KOPIKUNI — Design System
-   Dark Coffee Theme ☕
+   Dark Green Theme 🌿
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
 :root {
-  /* Core Colors */
-  --kopi-bg:        #0F0B09;
-  --kopi-surface:   #1C1410;
-  --kopi-surface2:  #251A14;
-  --kopi-border:    #3A2820;
-  --kopi-brown:     #8B4513;
-  --kopi-brown-h:   #A0521A;
-  --kopi-gold:      #D4A853;
-  --kopi-gold-h:    #E8BD6A;
-  --kopi-cream:     #F5F0EB;
-  --kopi-muted:     #9A8880;
-  --kopi-success:   #22C55E;
+  /* Core Colors — Dark Green Dominant Theme */
+  --kopi-bg:        #0F1F0F;
+  --kopi-surface:   #162416;
+  --kopi-surface2:  #1E301E;
+  --kopi-border:    #2A402A;
+
+  --kopi-brown:     #4CAF50;
+  --kopi-brown-h:   #66BB6A;
+
+  --kopi-gold:      #6DBF67;
+  --kopi-gold-h:    #88D084;
+
+  --kopi-cream:     #F0F7F0;
+  --kopi-muted:     #7AAB7A;
+
+  --kopi-success:   #4CAF50;
   --kopi-warning:   #F59E0B;
   --kopi-danger:    #EF4444;
   --kopi-info:      #3B82F6;
 
   /* Gradients */
-  --grad-primary: linear-gradient(135deg, #8B4513 0%, #D4A853 100%);
-  --grad-dark:    linear-gradient(180deg, #1C1410 0%, #0F0B09 100%);
-  --grad-card:    linear-gradient(145deg, #251A14 0%, #1C1410 100%);
+  --grad-primary: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+  --grad-dark:    linear-gradient(180deg, #162416 0%, #0F1F0F 100%);
+  --grad-card:    linear-gradient(145deg, #162416 0%, #1E301E 100%);
 
   /* Typography */
   --font-main: 'Plus Jakarta Sans', 'Inter', sans-serif;
 
-  /* Spacing */
+  /* Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
 
   /* Shadows */
-  --shadow-sm:  0 1px 3px rgba(0,0,0,0.4);
-  --shadow-md:  0 4px 16px rgba(0,0,0,0.5);
-  --shadow-lg:  0 8px 32px rgba(0,0,0,0.6);
-  --shadow-gold: 0 0 20px rgba(212,168,83,0.15);
+  --shadow-sm:  0 2px 6px rgba(0,0,0,0.25);
+  --shadow-md:  0 6px 20px rgba(0,0,0,0.35);
+  --shadow-lg:  0 10px 32px rgba(0,0,0,0.45);
+
+  --shadow-gold: 0 0 20px rgba(76,175,80,0.20);
 }
 
 /* ============ BASE ============ */
@@ -64,7 +68,7 @@ body {
 
 /* ============ NAVBAR ============ */
 .kopi-navbar {
-  background: rgba(28,20,16,0.95);
+  background: rgba(8,16,8,0.98);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--kopi-border);
   padding: 0.75rem 1.5rem;
@@ -204,7 +208,7 @@ body {
 }
 .kopi-sidebar-link.active {
   color: var(--kopi-gold);
-  background: rgba(212,168,83,0.08);
+  background: rgba(76,175,80,0.12);
   border-left-color: var(--kopi-gold);
 }
 
@@ -314,12 +318,12 @@ body {
 .btn-kopi-primary {
   background: var(--grad-primary);
   color: white;
-  box-shadow: 0 4px 12px rgba(139,69,19,0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.40);
 }
 .btn-kopi-primary:hover {
   opacity: 0.9;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(139,69,19,0.4);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.50);
   color: white;
   text-decoration: none;
 }
@@ -385,7 +389,7 @@ body {
 }
 .kopi-input:focus, .kopi-select:focus, .kopi-textarea:focus {
   border-color: var(--kopi-gold);
-  box-shadow: 0 0 0 3px rgba(212,168,83,0.12);
+  box-shadow: 0 0 0 3px rgba(76,175,80,0.15);
 }
 .kopi-input::placeholder { color: var(--kopi-muted); }
 .kopi-select option { background: var(--kopi-surface2); color: var(--kopi-cream); }
@@ -417,7 +421,7 @@ body {
 }
 .kopi-file-upload:hover {
   border-color: var(--kopi-gold);
-  background: rgba(212,168,83,0.04);
+  background: rgba(76,175,80,0.06);
 }
 .kopi-file-upload input[type="file"] { display: none; }
 
@@ -481,7 +485,7 @@ body {
 .badge-danger   { background: rgba(239,68,68,0.15);  color: #f87171; }
 .badge-info     { background: rgba(59,130,246,0.15); color: #60a5fa; }
 .badge-muted    { background: rgba(154,136,128,0.15);color: var(--kopi-muted); }
-.badge-gold     { background: rgba(212,168,83,0.15); color: var(--kopi-gold); }
+.badge-gold     { background: rgba(76,175,80,0.15);  color: var(--kopi-gold); }
 
 /* ============ ALERTS ============ */
 .kopi-alert {
@@ -701,7 +705,7 @@ body {
   content: '';
   position: absolute;
   width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(139,69,19,0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(76,175,80,0.10) 0%, transparent 70%);
   top: -200px; right: -200px;
   pointer-events: none;
 }
@@ -709,7 +713,7 @@ body {
   content: '';
   position: absolute;
   width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(212,168,83,0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(76,175,80,0.06) 0%, transparent 70%);
   bottom: -100px; left: -100px;
   pointer-events: none;
 }
@@ -795,7 +799,7 @@ body {
   left: 0;
   right: 0;
   height: 64px;
-  background: rgba(28,20,16,0.97);
+  background: rgba(8,16,8,0.98);
   backdrop-filter: blur(20px);
   border-top: 1px solid var(--kopi-border);
   display: none; /* shown via kopi-mobile-only */
@@ -849,7 +853,7 @@ body {
   align-items: center;
   justify-content: center;
   margin-top: -14px;
-  box-shadow: 0 4px 12px rgba(139,69,19,0.4);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.50);
 }
 
 .kopi-bottom-nav-label {
